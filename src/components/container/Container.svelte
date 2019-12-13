@@ -3,16 +3,11 @@
 </script>
 
 <style global>
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 .r--container {
-  @apply border-black;
+  @apply h-screen mx-auto px-4 py-2 overflow-y-auto border border-black;
 }
-
 </style>
 
-<div class="r--container">
-test
+<div class="container r--container">
+  <slot></slot>
 </div>
