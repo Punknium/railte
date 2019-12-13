@@ -6,7 +6,7 @@ export let tile = false
 export let dense = false
 export let outlined = false
 export let text = false
-export let color = 'blue'
+export let color = 'black'
 export let textColor = 'white'
 export let click = () => {}
 
@@ -21,6 +21,7 @@ const classes = [
   outlined || text ? `hover:bg-${normalizeColor(color, 100, true)}` : `hover:bg-${normalizeColor(color, 100)}`,
   outlined || text ? `text-${normalizeColor(color)}` : `text-${normalizeColor(textColor)}`,
   outlined && `border-${normalizeColor(color)}`,
+  text && `hover:border-${normalizeColor(color, 200, true)}`,
 ].filter(x => x).join(' ')
 
 </script>
@@ -33,7 +34,11 @@ const classes = [
   @apply font-bold;
 
   &.r--button--outlined {
-    @apply border-2
+    @apply border-2;
+  }
+
+  &.r--button--text {
+    @apply border-2 border-transparent;
   }
 
   &.r--button--dense {

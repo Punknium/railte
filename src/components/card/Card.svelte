@@ -1,7 +1,12 @@
 <script>
+export let flat = false
 
+const classes = [
+  'r--card',
+  flat && 'r--card-flat',
+].filter(x => x).join(' ')
 </script>
 
-<div class="r--card {$$props['class'] || ''}">
-  A Card
+<div class="{classes} {$$props['class'] || ''}">
+  <slot></slot>
 </div>
