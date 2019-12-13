@@ -4,6 +4,8 @@ import { normalizeColor } from '../../utils/color'
 export let fab = false
 export let tile = false
 export let dense = false
+export let outlined = false
+export let text = false
 export let color = 'blue'
 export let textColor = 'white'
 export let click = () => {}
@@ -13,9 +15,12 @@ const classes = [
   fab && 'r--button--fab',
   tile && 'r--button--tile',
   dense && 'r--button--dense',
-  `bg-${normalizeColor(color)}`,
-  `hover:bg-${normalizeColor(color, 200)}`,
-  `text-${normalizeColor(textColor)}`,
+  outlined && 'r--button--outlined',
+  text && 'r--button--text',
+  outlined || text ? null : `bg-${normalizeColor(color)}`,
+  outlined || text ? `hover:bg-${normalizeColor(color, 100, true)}` : `hover:bg-${normalizeColor(color, 100)}`,
+  outlined || text ? `text-${normalizeColor(color)}` : `text-${normalizeColor(textColor)}`,
+  outlined && `border-${normalizeColor(color)}`,
 ].filter(x => x).join(' ')
 
 </script>
@@ -27,6 +32,10 @@ const classes = [
   @apply rounded;
   @apply font-bold;
 
+  &.r--button--outlined {
+    @apply border-2
+  }
+
   &.r--button--dense {
     @apply py-1 px-2;
   }
@@ -36,7 +45,7 @@ const classes = [
   }
 
   &.r--button--fab {
-    @apply rounded-full h-12 w-12;
+    @apply rounded-full;
 
     &:not(.r--button--dense) {
       @apply h-12 w-12;
@@ -49,6 +58,6 @@ const classes = [
 }
 </style>
 
-<button class="{classes}" on:click={click}>
+<button class="{classes} {$$props['class'] || ''}" on:click={click}>
   <slot>Button</slot>
 </button>
